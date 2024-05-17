@@ -1,18 +1,25 @@
 import { Container, Form, Background } from "./styles";
-import { FiLogIn, FiMail, FiLock } from "react-icons/fi";
-import { useContext } from "react";
+import { FiMail, FiLock } from "react-icons/fi";
+import { useState } from "react";
 
-import { MyContext } from "../../myContext";
+import {useAuth} from "../../hooks/auth"
 
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
-import { TextButton } from "../../components/text-button";
 
 import { Link } from "react-router-dom";
 
 export function SignIn() {
-const data = useContext( MyContext)
-console.log("MEU contexto => ",data)
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+
+
+const {signIn} = useAuth()
+
+function handleSignIn(){
+signIn({email,password})
+
+}
 
   return (
     <Container>
@@ -23,10 +30,10 @@ console.log("MEU contexto => ",data)
         </div>
 
         <h2>Faça seu Login</h2>
-        <Input placeholder="E-mail" type="text" icon={FiMail} />
-        <Input placeholder="Senha" type="password" icon={FiLock} />
+        <Input onChange={e => setEmail(e.target.value)} placeholder="E-mail" type="text" icon={FiMail} />
+        <Input onChange={e => setPassword(e.target.value)} placeholder="Senha" type="password" icon={FiLock} />
 
-        <Button title="Entrar"></Button>
+        <Button onClick={handleSignIn} title="Entrar"/>
 
         <Link to="/register">Criar Conta</Link>
       </Form>

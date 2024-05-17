@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useAuth } from "../../hooks/auth";
+
 import { Container, Form, Avatar } from "./styles";
 import {
   FiLogIn,
@@ -12,6 +15,13 @@ import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 
 export function Profile() {
+  const { user } = useAuth();
+
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [OldPassword, setOldPassword] = useState();
+  const [PasswordNew, setPasswordNew] = useState();
+
   return (
     <Container>
       <header>
@@ -27,16 +37,27 @@ export function Profile() {
             alt="Foto do usuário"
           />
           <label htmlFor="avatar">
-          <FiCamera/>
-          <input id="avatar" type="file" />
+            <FiCamera />
+            <input id="avatar" type="file" />
           </label>
-        
         </Avatar>
-        <Input placeholder="Nome" type="text" icon={FiUser} />
-        <Input placeholder="E-mail" type="email" icon={FiMail} />
+        <Input
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          placeholder="Nome"
+          type="text"
+          icon={FiUser}
+        />
+        <Input
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          placeholder="E-mail"
+          type="email"
+          icon={FiMail}
+        />
         <div id="alterarSenha">
-          <Input placeholder="Senha Atual" type="password" icon={FiLock} />
-          <Input placeholder="Nova Senha" type="password" icon={FiLock} />
+          <Input onChange={e => setOldPassword(e.target.value)} placeholder="Senha Atual" type="password" icon={FiLock} />
+          <Input onChange={e => setPasswordNew(e.target.value)} placeholder="Nova Senha" type="password" icon={FiLock} />
         </div>
 
         <Button title="Salvar" />

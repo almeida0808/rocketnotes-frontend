@@ -40,6 +40,7 @@ export const Avatar = styled.div`
   height: 18.6rem;
 
   > img {
+    object-fit: cover;
     width: 18.6rem;
     height: 18.6rem;
     border-radius: 50%;

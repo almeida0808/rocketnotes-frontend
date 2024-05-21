@@ -1,19 +1,23 @@
 import { Container , Profile, Logaut} from "./styles";
 import {RiLogoutCircleLine} from 'react-icons/ri'
  import {useAuth} from "../../hooks/auth"
+ import { api } from "../../services/api";
+ import avatarPlaceholder from "../../assets/profile-undefined.png"
 
-export function Header({name = "Lucas Almeida", ...rest}) {
-  const {signOut} = useAuth()
+export function Header({...rest}) {
+  
+  const {user, signOut} = useAuth()
+  const avatarUrl =  user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
   
   return <Container>
     
 <Profile  to="/profile">
   
-  <img src="https://github.com/almeida0808.png" alt="Foto de Perfil" />
+  <img src={avatarUrl} alt={`Foto de ${user.name}`} />
 
   <div>
     <span>Bem Vindo,</span>
-    <strong>{name}</strong>
+    <strong>{user.name}</strong>
   </div>
 </Profile>
 

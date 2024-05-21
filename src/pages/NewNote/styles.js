@@ -39,9 +39,11 @@ export const Form = styled.form`
   }
 
   .tags {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 17.8rem);
+    gap: 0.8rem;
     flex-wrap: wrap;
+    margin-bottom: 1.6rem;
 
     input {
       width: 11.3rem;

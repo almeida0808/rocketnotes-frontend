@@ -52,10 +52,11 @@ if(!title){
 }
 if(newLink){
   alert("Ops... Um link ficou esquecido no formulario, confirme o link ou deixe o campo vazio!")
+return
 }
 if(newTag){
   alert("Ops... Uma tag ficou esquecida no formulario, confirme a tag ou deixe o campo vazio!")
-
+  return
 }
     await api.post("/notes", {
       title,

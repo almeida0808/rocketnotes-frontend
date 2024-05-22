@@ -38,13 +38,18 @@ export function Profile() {
   const [avatarFile, setAvatarFile] = useState(null); // guarda o arquivo da imagem pra enviar pra ser enviado pro nosso servidor(backend)
   
   async function handleUpdate() { // função que é chamada quando o botão é pressionado
-    const user = { // junta todas informações atualizadas num objeto com nome de user para passarmos pra nossa função de atualizar a foto
+    const updated = { // junta todas informações atualizadas num objeto com nome de user para passarmos pra nossa função de atualizar a foto
       name,
       email,
       password: NewPassword,
       old_password: OldPassword,
     };
-    await updateProfile({ user,avatarFile }); // envia pra nossa função update o arquivo da imagem e as informações do usuário
+
+const userUpdated = Object.assign(user, updated)
+
+
+
+    await updateProfile({ user, avatarFile }); // envia pra nossa função update o arquivo da imagem e as informações do usuário
   }
 
   async function handleChangeAvatar(event) { // quando enviamos um novo arquivo no input essa função é chamada

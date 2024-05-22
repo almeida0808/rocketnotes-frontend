@@ -37,7 +37,6 @@ export const Menu = styled.ul`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
-  color: ${({ theme }) => theme.COLORS.GRAY_100};
   font-weight: 600;
 
   list-style: none;

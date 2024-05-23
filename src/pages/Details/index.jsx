@@ -31,11 +31,17 @@ navigate(-1)
 
   useEffect(() => {
     async function fetchNote() {
-      const response = await api.get(`/notes/${params.id}`);
+      try
+    {  const response = await api.get(`/notes/${params.id}`);
       setData(response.data);
+     }catch(error){
+      alert(`Erro ao carregar nota: (${error.message})` )
+    
+    navigate("/")
+    }
     }
     fetchNote();
-  }, []);
+  }, [params.id]);
   return (
     // existe uma regra no react que faz com o nosso componente retorne apenas um elemento, pra resolver isso podemos ultilizzar o fragment ,que ser ve como um emmbrulhador , sintax fragment =  <> </> ou podemos usar uma div.
 

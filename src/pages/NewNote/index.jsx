@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useState } from "react";
+import { TextButton } from "../../components/text-button";
 
 export function NewNote() {
   const [links, setLinks] = useState([]); // estado que guarda todos os link que ja foram adicionados
@@ -46,6 +47,19 @@ const navigate = useNavigate()
     setTags((prevState) => prevState.filter((tag) => tag !== deleted));
   }
 
+  function handleBack(){
+console.log(tags.length == 0 , links.length == 0 , description.length == 0 , title.length == 0)
+    if(!tags.length > 0 || !links.length > 0 || !description.length > 0 || !title.length > 0){
+    const confirm = window.confirm("Deseja sair sem salvar a nota?")
+    
+      if(confirm){
+        navigate(-1)
+      }
+ }
+
+
+  }
+
   async function handleNewNote() {
 if(!title){
   alert("Insira um título na nota.")
@@ -65,7 +79,7 @@ if(newTag){
       links,
     });
     alert("Nota criada com sucesso!");
-    navigate("/")
+    navigate(-1)
   }
 
   return (
@@ -76,7 +90,7 @@ if(newTag){
         <Form>
           <header>
             <h1>Criar Nota</h1>
-            <Link to="/">voltar</Link>
+<TextButton title="Voltar"onClick={handleBack}/>
           </header>
           <Input
             placeholder="Título"

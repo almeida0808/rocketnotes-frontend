@@ -14,7 +14,19 @@ const navigate = useNavigate()
   const params = useParams();
 
 function handleBack(){
-navigate("/")
+navigate(-1)
+}
+
+
+async function handleRemoveNote(){
+  const confirm = window.confirm("Tem certeza que deseja excluir essa nota?")
+if(confirm){
+await api.delete(`/notes/${params.id}`)
+alert("A nota foi deletada com sucesso!")
+navigate(-1)
+
+}
+
 }
 
   useEffect(() => {
@@ -34,7 +46,9 @@ navigate("/")
       {data && (
         <main>
           <Content>
-            <TextButton title="Excluir Nota" />
+            <TextButton 
+            onClick={handleRemoveNote}
+            title="Excluir Nota" />
 
             <h1>{data.title}</h1>
             <p>{data.description} </p>

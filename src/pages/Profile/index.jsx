@@ -16,6 +16,7 @@ import { // import icons
 //COMPONENTES
 import { Input } from "../../components/input"; 
 import { Button } from "../../components/button";
+import {  useNavigate } from "react-router-dom";
 
 // PAGE PROFILE
 export function Profile() {
@@ -37,6 +38,8 @@ export function Profile() {
   const [avatar, setAvatar] = useState(avatarUrl); // guarda o endereço da imagem do usuário
   const [avatarFile, setAvatarFile] = useState(null); // guarda o arquivo da imagem pra enviar pra ser enviado pro nosso servidor(backend)
   
+  const navigate = useNavigate()
+
   async function handleUpdate() { // função que é chamada quando o botão é pressionado
     const updated = { // junta todas informações atualizadas num objeto com nome de user para passarmos pra nossa função de atualizar a foto
       name,
@@ -46,7 +49,6 @@ export function Profile() {
     };
 
 const userUpdated = Object.assign(user, updated)
-
 
 
     await updateProfile({ user, avatarFile }); // envia pra nossa função update o arquivo da imagem e as informações do usuário
@@ -61,12 +63,20 @@ const userUpdated = Object.assign(user, updated)
     const imagePreview = URL.createObjectURL(file); // cria um URl temporario do arquivo que foi enviado, para que possa ser atualizado instantaneamente a imagem e o usuário poder ver a imagem antes de clicar no botão de salvar, então caso ele saia sem confirmar a atualização de perfil essa imagemPReviw vai sumir e a imagem que esta salva vai voltar a ser a foto de perfil do usuário
     setAvatar(imagePreview); // coloca a imagem preview como a foto do usuário para ele ter uma pre vizualização antes de confirmar
   }
+
+
+
+function handleBack(){
+
+navigate(-1)        
+}
+
   return (
     <Container>
       <header>
-        <a href="/">
+       <button type="button" onClick={handleBack}>
           <FiArrowLeft />
-        </a>
+        </button>
       </header>
 
       <Form>

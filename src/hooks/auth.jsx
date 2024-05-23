@@ -42,12 +42,13 @@ function AuthProvider({
     }
   }
 
+
   function signOut() {
     // função para deslogar
     // remove os dados de dentro do local storage
     localStorage.removeItem("@rocketnotes:token");
     localStorage.removeItem("@rocketnotes:user");
-
+      
     setData({}); // define o nosso estado data como vazio, ou seja remove nosso token de autenticação e isso faz com que o usuário seja redirecionado para as rotas de login ou criar conta
   }
 
